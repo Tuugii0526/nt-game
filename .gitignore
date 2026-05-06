@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+judge.db
+judge.db-journal
+judge.db-wal
+judge.db-shm
+.DS_Store
+.idea/
+.vscode/

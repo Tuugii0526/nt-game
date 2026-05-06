@@ -1,0 +1,45 @@
+services:
+  app:
+    build: ./app
+    image: judge-app
+    container_name: judge-app
+    ports:
+      - "8000:8000"
+    environment:
+      JUDGE_QUEUE_DIR: /queue
+      JUDGE_DB_PATH: /data/judge.db
+      JUDGE_PROBLEMS_DIR: /problems
+      JUDGE_SECRET: ${JUDGE_SECRET:-change-me-air-gapped-anyway}
+    volumes:
+      - ./problems:/problems:ro
+      - data:/data
+      - queue:/queue
+    restart: unless-stopped
+
+  worker:
+    build: ./worker
+    image: judge-worker
+    deploy:
+      replicas: 3
+    network_mode: none
+    read_only: true
+    user: "65534:65534"
+    pids_limit: 64
+    mem_limit: 128m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=8m,exec
+    environment:
+      JUDGE_QUEUE_DIR: /queue
+    volumes:
+      - queue:/queue
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  data:
+  queue:

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ problem.title }} - Coding Judge{% endblock %}
+{% block content %}
+  <h1>{{ problem.title }}</h1>
+  <p class="muted">
+    Time limit: {{ problem.time_limit_sec }}s ·
+    Memory: {{ problem.memory_limit_mb }} MB ·
+    Tests: {{ problem.tests|length }}
+  </p>
+
+  <article class="statement">{{ problem.statement_html|safe }}</article>
+
+  <form id="submit-form" method="post" action="/submit">
+    <input type="hidden" name="problem_id" value="{{ problem.id }}" />
+    <label for="code">Your Python solution</label>
+    <textarea name="code" id="code" rows="16" spellcheck="false"
+              autocomplete="off" required
+              placeholder="# Read with input(); write with print()"></textarea>
+    <button type="submit" id="submit-btn">Submit</button>
+  </form>
+
+  <div id="verdict" class="verdict" aria-live="polite"></div>
+
+  <h2>Your submissions</h2>
+  <ul class="history" id="history">
+    {% for s in history %}
+      <li>
+        <span class="verdict-tag v-{{ s.verdict }}">{{ s.verdict }}</span>
+        <span>{{ s.tests_passed }} / {{ s.tests_total }}</span>
+        <span class="muted">{{ s.runtime_ms }} ms</span>
+      </li>
+    {% else %}
+      <li class="muted empty">No submissions yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/submit.js"></script>
+{% endblock %}

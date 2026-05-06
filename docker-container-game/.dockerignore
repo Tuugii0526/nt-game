@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+.venv
+venv
+.env
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.DS_Store
+.git
+.gitignore
+.dockerignore
+README.md
+DEPLOY.md

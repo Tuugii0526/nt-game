@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Coding Judge{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <a href="/problems" class="brand">Coding Judge</a>
+    {% if participant %}
+      <nav>
+        <span class="who">{{ participant.name }}</span>
+        <a href="/leaderboard">Leaderboard</a>
+        <span id="timer" data-seconds-left="{{ seconds_left }}"></span>
+      </nav>
+    {% endif %}
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <script src="/static/timer.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,2 +1,0 @@
-# game
-# nt-game

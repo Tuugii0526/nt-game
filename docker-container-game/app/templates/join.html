@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Join - Coding Judge{% endblock %}
+{% block content %}
+  <section class="join">
+    <h1>Enter your name</h1>
+    <p class="muted">Your 25-minute timer starts as soon as you join.</p>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post" action="/join">
+      <input type="text" name="name" autofocus required maxlength="40"
+             placeholder="e.g. Tuguldur" autocomplete="off" />
+      <button type="submit">Start</button>
+    </form>
+  </section>
+{% endblock %}

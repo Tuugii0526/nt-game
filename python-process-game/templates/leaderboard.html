@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Leaderboard - Coding Judge{% endblock %}
+{% block content %}
+  <h1>Leaderboard</h1>
+  <table class="leaderboard">
+    <thead>
+      <tr><th>#</th><th>Name</th><th>Tests passed</th></tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ r.name }}</td>
+          <td>{{ r.total }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="3" class="muted">Nobody has submitted yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p><a href="/problems">Back to problems</a></p>
+{% endblock %}

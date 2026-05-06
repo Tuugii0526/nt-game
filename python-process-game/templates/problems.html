@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Problems - Coding Judge{% endblock %}
+{% block content %}
+  <h1>Problems</h1>
+  <ul class="problem-list">
+    {% for p in problems %}
+      <li>
+        <a href="/problem/{{ p.id }}">{{ p.title }}</a>
+        <span class="score">{{ best.get(p.id, 0) }} / {{ p.tests|length }}</span>
+      </li>
+    {% else %}
+      <li class="muted">No problems are loaded.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
